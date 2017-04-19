@@ -177,11 +177,11 @@
                     }
                     if(that.type){
                         var DateDiff = GetDateDiff(that.date[0],that.date[1])
-                        $(ele).hide()
                         that.options.onSelected(that.date,DateDiff)
                     }else{
                         that.options.onSelected(that.date[0])
                     }
+                    $(ele).hide()
                 })
         },
         init: function() {
