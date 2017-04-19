@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>日历插件calendar.js</title>
+<link rel="stylesheet" href="css/calendar.css">
+</head>
+<body>
+	<input type="text" id="dt" placeholder="请选择日期">
+	<div class="calendar calendar_day"></div>
+<script type="text/template" charset="utf-8" id='calendar_template'>
+	<div class="view_date">
+		<div class="calendar_title">
+			<div class="calendar_display"><span class="year">{{=it.year}}</span>/<span class="dark m">{{=it.month}}</span></div>
+			<div class="calendar_arrow">
+				<span class="prev" title="上一月">&lt;</span>
+				<span class="next" title="下一月">&gt;</span>
+			</div>
+		</div>
+		<div class="calendar_body date">
+			<ul class="week">
+				<li>日</li>
+				<li>一</li>
+				<li>二</li>
+				<li>三</li>
+				<li>四</li>
+				<li>五</li>
+				<li>六</li>
+			</ul>
+			<ul class="days"></ul>
+		</div>
+	</div>
+	<div class="view_month">
+		<div class="calendar_title">
+			<div class="calendar_display year">{{=it.year}}</div>
+			<div class="calendar_arrow">
+				<span class="prev" title="上一年">&lt;</span>
+				<span class="next" title="下一年">&gt;</span>
+			</div>
+		</div>
+		<div class="calendar_body month">
+			{{for(var i=1;i<13;i++){ }}
+				<li {{ if(it.month==i){ }}class="now"{{ } }} data-v="{{=i}}">{{=i}}月</li>
+			{{ } }}
+		</div>
+	</div>
+	<div class="calendar_close">
+		<div class="closeBtn">确定</div>
+	</div>
+</script>
+<script type="text/template" charset="utf-8" id='date_template'>
+	{{for(var j=0;j<it.indexOf(1);j++){ }}
+	<li class="old" disabled>{{=it[j]}}</li>
+	{{ } }}
+	{{for(var j=it.indexOf(1);j<it.lastIndexOf(1);j++){ }}
+	<li>{{=it[j]}}</li>
+	{{ } }}
+	{{for(var j=it.lastIndexOf(1);j<it.length;j++){ }}
+	<li class="new" disabled>{{=it[j]}}</li>
+	{{ } }}
+</script>
+<script src="js/jquery.min.js"></script>
+<script src="js/doT.min.js"></script>
+<script src="js/calendar.js"></script>
+<script>
+	var evalcalendar = doT.template($("#calendar_template").text());
+	var evaldate = doT.template($("#date_template").text());
+    $('.calendar').calendar({
+    	trigger:"#dt",
+    	// type:"range",
+        onSelected: function (date,days) {
+        	console.log(date)
+        	// console.log(days)
+        }
+    });
+</script>
+</body>
+</html>
