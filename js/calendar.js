@@ -31,6 +31,10 @@
         function isLeap(y) {
             return (y % 100 !== 0 && y % 4 === 0) || (y % 400 === 0);
         }
+        function f(t){
+            t = t+"";
+            return (t.length==1) && "0"+t || t;
+        }
         function getDaysNum(y, m) {
             var num = 31;
             switch (m) {
@@ -86,8 +90,8 @@
             var week_no = [],days = [],data = [],year = this.year,month = this.month;
             days.push(getDaysNum(year,month-1));
             days.push(getDaysNum(year,month));
-            week_no.push(new Date(year+"-"+month+"-"+"1").getDay())
-            week_no.push(new Date(year+"-"+month+"-"+days[1]).getDay())
+            week_no.push(new Date(year+"-"+f(month)+"-"+"01").getDay())
+            week_no.push(new Date(year+"-"+f(month)+"-"+f(days[1])).getDay())
             var data = this.getdata(days,week_no);
             return data;
         },
@@ -162,8 +166,9 @@
                     $(ele).toggleClass("calendar_month").toggleClass("calendar_day")
                 });
             // open
-                $(trigger).click(function(){
+                $(trigger).click(function(event){
                     $(ele).show()
+                    $("body").addClass("row")
                 })
             // close
                 $(ele).on("click",".closeBtn",function(){
@@ -181,7 +186,8 @@
                     }else{
                         that.options.onSelected(that.date[0])
                     }
-                    $(ele).hide()
+                    $(ele).hide();
+                    $("body").removeClass("row")
                 })
         },
         init: function() {
