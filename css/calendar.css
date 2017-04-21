@@ -10,18 +10,22 @@ ul, ol, li {
 }
 .calendar {
     position: relative;
-    width: 280px;
-    height: 360px;
     background: #fdfdfd;
     border: 1px solid #e8e8e8;
     box-shadow: 1px 2px 3px #ddd;
     padding: 10px;
-    z-index: 1;
+    z-index: 10;
     text-align: center;
     display: none;
 }
-.view_date,.calendar .date .week,.calendar .date .day,.calendar .month{
+.calendar_title,.calendar .date .week,.calendar .date .days,.calendar .month{
     overflow: hidden;
+}
+.calendar_display,.calendar .week li,.calendar .days li,.calendar .month li {
+    float: left;
+}
+.calendar_arrow {
+    float: right;
 }
 .view_date,.view_month{
     transform: rotateY(0deg);
@@ -47,25 +51,12 @@ ul, ol, li {
 }
 .calendar_title {
     padding: 10px;
-    height: 30px;
     font-size: 28px;
     color: #ddd;
     line-height: 30px;
 }
-.calendar_display {
-    float: left;
-}
-.calendar_arrow {
-    float: right;
-}
 .calendar .calendar_body{
     line-height: 40px;
-}
-.calendar .date .days{
-    width: 100%;
-}
-.calendar .week li,.calendar .days li,.calendar .month li{
-    float: left;
 }
 .calendar .week li,.calendar .days li {
     width: 14.2857%;
