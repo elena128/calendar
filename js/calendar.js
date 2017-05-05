@@ -78,8 +78,13 @@
             for (var y = 0; y < (6-week_no[1]) ; y++) {
                 data.push(y+1)
             };
+            if(data[0]==1){
+                for (var j = 0; j < 7 ; j++) {
+                    data.unshift(days[0]-j)
+                };
+            }
             if(data.length == 35){
-                var start = data[data.length-1]<8?data[data.length-1]:1;
+                var start = data[data.length-1]<8?data[data.length-1]+1:1;
                 for (var z = 0; z < 7 ; z++) {
                     data.push(start+z)
                 };
@@ -101,6 +106,14 @@
             }else{
                 this[n]+=1;
             }
+            if(n=="year"){
+                if(this.year==this.now[0]){
+                    $(".month li").eq(this.now[1]-1).addClass("now");
+                }else{
+                    $(".month").find("li.now").removeClass("now");
+                }
+                $(".month").find("li.selected").removeClass("selected");
+            }
             if(this.month>12){
                 this.month = 1;
                 this.year += 1;
@@ -115,8 +128,22 @@
             var data = this.getday(this.year,this.month);
             $(".days").html(evaldate(data));
             $(".year").html(this.year)
+            if(this.year<this.now[0] || (this.year==this.now[0] && this.month<this.now[1])){
+                $(".days li").addClass("last").attr("disabled",true);
+            }
             if(this.year==this.now[0] && this.month==this.now[1]){
-                $(".days li").eq(data.indexOf(this.day)).addClass("now")
+                var no1 = data.indexOf(this.day);
+                var no2 = data.lastIndexOf(this.day);
+                if($(".days li").eq(no1).hasClass("old")){
+                    $(".days li").eq(no2).addClass("now");
+                    var n = no2;
+                }else{
+                    $(".days li").eq(no1).addClass("now");
+                    var n = no1;
+                }
+                for (var i = 0; i < n; i++) {console.log()
+                    $(".days li").eq(i).addClass("last").attr("disabled",true);
+                }
             }
             for (var i = 0; i < this.date.length; i++) {
                 var date = this.date[i].split("-");
@@ -156,7 +183,7 @@
                         that.date = [];
                     }
                     $(this).addClass('selected');
-                    that.date.push(that.year+'-'+that.month+'-'+parseInt($(this).html()));
+                    that.date.push(that.year+'-'+f(that.month)+'-'+f(parseInt($(this).html())));
                 })
                 $(ele).on("click",".view_month .month li",function(){
                     that.month = $(this).data("v");
