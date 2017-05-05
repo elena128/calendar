@@ -64,7 +64,7 @@ ul, ol, li {
 .calendar .month li {
     width: 25%;
 }
-.calendar li.old[disabled],.calendar li.new[disabled] {
+.calendar li.old[disabled],.calendar li.new[disabled],.calendar li.last[disabled] {
     color: #bbb;
     background: #f9f9f9;
 }
