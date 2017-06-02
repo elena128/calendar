@@ -37,6 +37,7 @@ ul, ol, li {
     position: absolute;
     top: 0;
     left: 0;
+    width:calc(100% - 20px);
     padding: 10px;
 }
 .calendar_day .view_date,.calendar_month .view_month {
@@ -86,3 +87,18 @@ ul, ol, li {
     border-radius: 5px;
     line-height: 25px;
 }
+
+/*箭头*/
+    .triangle_left,.triangle_right {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-top: 13px solid transparent;
+        border-bottom: 13px solid transparent;
+    }
+    .triangle_left {
+        border-right: 26px solid #dddddd;
+    }
+    .triangle_right {
+        border-left: 26px solid #dddddd;
+    }
